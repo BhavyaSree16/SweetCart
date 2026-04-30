@@ -1,14 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Suite">
-  <listeners>
-        <listener class-name="listeners.TestListener"/>
-    </listeners>
 
-    <test name="Login Tests">
-        <classes>
-            <class name="tests.LoginTest"/>
-        </classes>
-    </test>
+<suite name="SweetCart Suite" parallel="tests" thread-count="5">
+<!-- Listener for screenshots -->
+<listeners>
+    <listener class-name="listeners.TestListener"/>
+</listeners>
+
+<!-- Module 1: Authentication -->
+<test name="Authentication Tests">
+    <classes>
+        <class name="tests.LoginTest"/>
+    </classes>
+</test>
+
+<!-- Module 2: Product Browsing -->
+<test name="Sweets Tests">
+    <classes>
+        <class name="tests.SweetsTest"/>
+    </classes>
+</test>
+
+<!-- Module 3: Basket -->
+<test name="Basket Tests">
+    <classes>
+        <class name="tests.BasketTest"/>
+    </classes>
+</test>
+
+<!-- Module 4: Account -->
+<test name="Account Tests">
+    <classes>
+        <class name="tests.AccountTest"/>
+    </classes>
+</test>
+
+<!-- Module 5: Navigation -->
+<test name="Navigation Tests">
+    <classes>
+        <class name="tests.NavigationTest"/>
+    </classes>
+</test>
  <!-- Test -->
 </suite> <!-- Suite -->
