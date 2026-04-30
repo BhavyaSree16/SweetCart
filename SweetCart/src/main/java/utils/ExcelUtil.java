@@ -1,0 +1,44 @@
+package utils;
+
+import org.apache.poi.xssf.usermodel.*;
+import java.io.FileInputStream;
+
+public class ExcelUtil {
+
+    public static Object[][] getData(String sheetName) {
+
+        try {
+            String path = System.getProperty("user.dir") + "/src/test/resources/testdata.xlsx";
+
+            FileInputStream fis = new FileInputStream(path);
+            XSSFWorkbook wb = new XSSFWorkbook(fis);
+
+            XSSFSheet sheet = wb.getSheet(sheetName);
+
+            if (sheet == null) {
+                throw new RuntimeException("Sheet not found!");
+            }
+
+            int rows = sheet.getPhysicalNumberOfRows();
+            int cols = sheet.getRow(0).getPhysicalNumberOfCells();
+
+            Object[][] data = new Object[rows - 1][cols];
+
+            for (int i = 1; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    data[i - 1][j] = sheet.getRow(i).getCell(j).toString();
+                }
+            }
+
+            wb.close();
+            return data;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            return new Object[][] {
+                {"wrong@sweetshop.local", "wrong123", "FALSE"}
+            };
+        }
+    }
+}
